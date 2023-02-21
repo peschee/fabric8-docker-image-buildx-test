@@ -12,6 +12,7 @@
     <properties>
         <docker.contextDir>${project.build.directory}/docker-context</docker.contextDir>
         <docker.imagePropertyConfiguration>override</docker.imagePropertyConfiguration>
+        <docker.platforms/>
     </properties>
 
     <build>
@@ -30,6 +31,11 @@
                             <image>
                                 <name>${project.groupId}.${project.artifactId}</name>
                                 <build>
+                                    <buildx>
+                                        <platforms>
+                                            <platform>${docker.platforms}</platform>
+                                        </platforms>
+                                    </buildx>
                                     <tags>
                                         <tag>latest</tag>
                                         <tag>${project.version}</tag>
@@ -92,31 +98,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>buildx</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>io.fabric8</groupId>
-                        <artifactId>docker-maven-plugin</artifactId>
-                        <configuration>
-                            <images>
-                                <image>
-                                    <build>
-                                        <buildx>
-                                            <platforms>
-                                                <platform>linux/amd64</platform>
-                                            </platforms>
-                                        </buildx>
-                                    </build>
-                                </image>
-                            </images>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
