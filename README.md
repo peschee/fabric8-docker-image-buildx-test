@@ -3,7 +3,7 @@
 ## Run with
 
 ```shell
-$ mvn clean install -Pbuildx
+$ mvn clean install
 $ docker run --rm com.inventage.test.fabric8-docker-image-buildx-test:latest
 ```
 
